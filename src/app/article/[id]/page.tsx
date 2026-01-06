@@ -1,4 +1,4 @@
-import { getArticles } from "@/lib/store";
+import { getArticleById } from "@/lib/store";
 import Link from "next/link";
 import { ArrowLeft } from "lucide-react";
 
@@ -6,25 +6,15 @@ interface PageProps {
     params: { id: string };
 }
 
-async function getArticle(id: string) {
-    try {
-        const articles = await getArticles();
-        return articles.find(a => a.id === id);
-    } catch (e) {
-        console.error(e);
-        return null; // Or throw to let Error Boundary handle it, but for now we want to inspect
-    }
-}
-
 export default async function ArticlePage({ params }: PageProps) {
-    // Debugging: let's see why it's failing
     let article;
     let errorMsg = '';
 
     try {
-        article = await getArticle(params.id);
+        article = await getArticleById(params.id);
     } catch (e: any) {
         errorMsg = e.message || JSON.stringify(e);
+        console.error("Error fetching article:", e);
     }
 
     if (!article) {
@@ -37,14 +27,6 @@ export default async function ArticlePage({ params }: PageProps) {
                         <pre className="text-xs whitespace-pre-wrap">{errorMsg}</pre>
                     </div>
                 )}
-                <p className="text-beige-900/60 mb-8">
-                    Possible reasons:
-                    <ul className="list-disc list-inside mt-2 text-sm">
-                        <li>Database connection failed (Check Environment Variables)</li>
-                        <li>Table does not interact (Check if Query was run)</li>
-                        <li>Article ID is wrong</li>
-                    </ul>
-                </p>
                 <Link href="/" className="text-amber-800 hover:underline">Return to Home</Link>
             </div>
         );
@@ -78,8 +60,6 @@ export default async function ArticlePage({ params }: PageProps) {
                 {/* Article Cover Image */}
                 {article.imageUrl && (
                     <div className="relative w-full h-[50vh] mb-12 rounded-xl overflow-hidden shadow-sm">
-                        {/* Since we don't know the domain of user provided URLs, we might need unoptimized or config. 
-                        For prototype, we'll try unoptimized if external. */}
                         {/* eslint-disable-next-line @next/next/no-img-element */}
                         <img
                             src={article.imageUrl}
@@ -95,8 +75,6 @@ export default async function ArticlePage({ params }: PageProps) {
             </div>
 
             <hr className="my-16 border-beige-200" />
-
-            {/* Footer / Read More area could go here */}
         </article>
     );
 }
