@@ -1,0 +1,20 @@
+generator client {
+  provider = "prisma-client-js"
+}
+
+datasource db {
+  provider = "postgresql"
+  url = env("POSTGRES_URL") // Uses Vercel standard env var
+  directUrl = env("POSTGRES_URL_NON_POOLING") // For direct connection if needed
+}
+
+model Article {
+  id        String   @id @default(uuid())
+  title     String
+  author    String
+  category  String
+  content   String   @db.Text
+  imageUrl  String?
+  status    String   @default("pending") // pending, approved, rejected
+  createdAt DateTime @default(now())
+}
