@@ -7,7 +7,7 @@ interface PageProps {
 }
 
 async function getArticle(id: string) {
-    const articles = getArticles();
+    const articles = await getArticles();
     return articles.find(a => a.id === id);
 }
 

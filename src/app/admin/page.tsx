@@ -4,8 +4,9 @@ import { Check, X } from "lucide-react";
 
 export const dynamic = 'force-dynamic';
 
-export default function AdminPage() {
-    const articles = getArticles().sort((a, b) => b.createdAt - a.createdAt);
+export default async function AdminPage() {
+    const allArticles = await getArticles();
+    const articles = allArticles.sort((a, b) => b.createdAt - a.createdAt);
 
     return (
         <div>

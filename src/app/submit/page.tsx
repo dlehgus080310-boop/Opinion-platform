@@ -51,30 +51,32 @@ export default function SubmitPage() {
                         <option value="Culture">Culture</option>
                         <option value="Medical">Medical</option>
                         <option value="Essay">Essay</option>
+                        <option value="Portfolio (Art)">Portfolio (Art)</option>
+                        <option value="Portfolio (Architecture)">Portfolio (Architecture)</option>
                     </select>
                 </div>
 
                 <div>
-                    <label htmlFor="imageUrl" className="block text-sm font-medium text-beige-900 mb-2">
-                        Cover Image URL
+                    <label htmlFor="imageFile" className="block text-sm font-medium text-beige-900 mb-2">
+                        Cover Image (Upload)
                     </label>
                     <input
-                        type="url"
-                        id="imageUrl"
-                        name="imageUrl"
+                        type="file"
+                        id="imageFile"
+                        name="imageFile"
+                        accept="image/*"
                         className="w-full px-4 py-2 rounded-lg border border-beige-200 bg-white focus:outline-none focus:ring-2 focus:ring-amber-200/50"
-                        placeholder="https://example.com/image.jpg (Optional)"
                     />
+                    <p className="text-xs text-beige-900/50 mt-1">For Portfolios, an image is recommended.</p>
                 </div>
 
                 <div>
                     <label htmlFor="content" className="block text-sm font-medium text-beige-900 mb-2">
-                        Content
+                        Content (Optional for Portfolio)
                     </label>
                     <textarea
                         id="content"
                         name="content"
-                        required
                         rows={12}
                         className="w-full px-4 py-2 rounded-lg border border-beige-200 bg-white focus:outline-none focus:ring-2 focus:ring-amber-200/50 resize-y"
                         placeholder="Write your article here..."

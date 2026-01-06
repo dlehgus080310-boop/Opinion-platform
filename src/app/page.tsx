@@ -6,7 +6,7 @@ import Image from "next/image";
 
 export const dynamic = 'force-dynamic';
 
-const CATEGORIES: Category[] = ['Politics', 'Economy', 'Society', 'Culture', 'Medical', 'Essay'];
+const CATEGORIES: Category[] = ['Politics', 'Economy', 'Society', 'Culture', 'Medical', 'Essay', 'Portfolio (Art)', 'Portfolio (Architecture)'];
 
 interface PageProps {
   searchParams: Promise<{ category?: string }>;
@@ -16,7 +16,8 @@ export default async function Home(props: PageProps) {
   const searchParams = await props.searchParams;
   const selectedCategory = searchParams.category;
 
-  let articles = getArticles().filter(a => a.status === 'approved');
+  const allArticles = await getArticles();
+  let articles = allArticles.filter(a => a.status === 'approved');
 
   if (selectedCategory && CATEGORIES.includes(selectedCategory as Category)) {
     articles = articles.filter(a => a.category === selectedCategory);
