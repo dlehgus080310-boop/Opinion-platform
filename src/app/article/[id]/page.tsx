@@ -7,17 +7,44 @@ interface PageProps {
 }
 
 async function getArticle(id: string) {
-    const articles = await getArticles();
-    return articles.find(a => a.id === id);
+    try {
+        const articles = await getArticles();
+        return articles.find(a => a.id === id);
+    } catch (e) {
+        console.error(e);
+        return null; // Or throw to let Error Boundary handle it, but for now we want to inspect
+    }
 }
 
 export default async function ArticlePage({ params }: PageProps) {
-    const article = await getArticle(params.id);
+    // Debugging: let's see why it's failing
+    let article;
+    let errorMsg = '';
+
+    try {
+        article = await getArticle(params.id);
+    } catch (e: any) {
+        errorMsg = e.message || JSON.stringify(e);
+    }
 
     if (!article) {
         return (
-            <div className="text-center py-20">
+            <div className="text-center py-20 px-4">
                 <h2 className="text-2xl font-bold text-beige-900 mb-4">Article not found</h2>
+                {errorMsg && (
+                    <div className="mb-4 text-red-500 bg-red-50 p-4 rounded text-left overflow-auto max-w-lg mx-auto">
+                        <p className="font-bold">Error Details:</p>
+                        <pre className="text-xs whitespace-pre-wrap">{errorMsg}</pre>
+                    </div>
+                )}
+                <p className="text-beige-900/60 mb-8">
+                    Possible reasons:
+                    <ul className="list-disc list-inside mt-2 text-sm">
+                        <li>Database connection failed (Check Environment Variables)</li>
+                        <li>Table does not interact (Check if Query was run)</li>
+                        <li>Article ID is wrong</li>
+                    </ul>
+                </p>
                 <Link href="/" className="text-amber-800 hover:underline">Return to Home</Link>
             </div>
         );
