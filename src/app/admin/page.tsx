@@ -42,7 +42,7 @@ export default async function AdminPage() {
                                 <p className="text-sm text-beige-900/60 line-clamp-2">{article.content}</p>
                             </div>
 
-                            <div className="flex items-center gap-2 shrink-0">
+                            <div className="flex items-center gap-3 shrink-0 mt-4 md:mt-0">
                                 {article.status === 'pending' && (
                                     <>
                                         <form action={async () => {
@@ -51,10 +51,11 @@ export default async function AdminPage() {
                                         }}>
                                             <button
                                                 type="submit"
-                                                className="p-2 bg-green-50 text-green-700 hover:bg-green-100 rounded-full transition-colors border border-green-200"
-                                                title="Approve"
+                                                className="flex items-center gap-1 px-4 py-2 bg-green-600 text-white rounded-lg hover:bg-green-700 transition-colors text-sm font-medium shadow-sm"
+                                                title="Approve Article"
                                             >
-                                                <Check size={20} />
+                                                <Check size={16} />
+                                                Approve
                                             </button>
                                         </form>
 
@@ -64,30 +65,29 @@ export default async function AdminPage() {
                                         }}>
                                             <button
                                                 type="submit"
-                                                className="p-2 bg-red-50 text-red-700 hover:bg-red-100 rounded-full transition-colors border border-red-200"
-                                                title="Reject"
+                                                className="flex items-center gap-1 px-4 py-2 bg-white text-red-600 border border-red-200 rounded-lg hover:bg-red-50 transition-colors text-sm font-medium"
+                                                title="Reject Article"
                                             >
-                                                <X size={20} />
+                                                <X size={16} />
+                                                Reject
                                             </button>
                                         </form>
                                     </>
                                 )}
 
-                                {/* Delete Button for ALL statuses */}
-                                <div className="ml-2 pl-2 border-l border-beige-200 flex items-center">
-                                    <form action={async () => {
-                                        'use server';
-                                        await deleteArticle(article.id);
-                                    }}>
-                                        <button
-                                            type="submit"
-                                            className="p-2 bg-gray-50 text-gray-500 hover:bg-red-50 hover:text-red-600 rounded-full transition-colors border border-gray-200 group"
-                                            title="Delete Permanently"
-                                        >
-                                            <Trash2 size={20} className="group-hover:stroke-red-600" />
-                                        </button>
-                                    </form>
-                                </div>
+                                <form action={async () => {
+                                    'use server';
+                                    await deleteArticle(article.id);
+                                }}>
+                                    <button
+                                        type="submit"
+                                        className="flex items-center gap-1 px-3 py-2 text-gray-400 hover:text-red-600 hover:bg-red-50 rounded-lg transition-colors text-sm"
+                                        title="Delete Permanently"
+                                    >
+                                        <Trash2 size={16} />
+                                        <span className="hidden md:inline">Delete</span>
+                                    </button>
+                                </form>
                             </div>
                         </div>
                     ))
