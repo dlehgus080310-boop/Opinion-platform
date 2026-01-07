@@ -1,10 +1,10 @@
 import { loginAdmin } from "@/app/actions";
 
-export default function AdminLoginPage({
-    searchParams,
-}: {
-    searchParams?: { error?: string };
+export default async function AdminLoginPage(props: {
+    searchParams: Promise<{ error?: string }>;
 }) {
+    const searchParams = await props.searchParams;
+
     return (
         <div className="flex min-h-screen items-center justify-center bg-beige-50">
             <div className="w-full max-w-md p-8 bg-white rounded-xl shadow-md border border-beige-200">
