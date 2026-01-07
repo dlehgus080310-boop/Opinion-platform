@@ -1,6 +1,70 @@
 import { getArticles } from "@/lib/store";
-import { approveArticle, rejectArticle } from "@/app/actions";
-import { Check, X } from "lucide-react";
+import { approveArticle, rejectArticle, deleteArticle } from "@/app/actions";
+import { Check, X, Trash2 } from "lucide-react";
+
+// ... (keep rest of top content)
+
+// Inside the map loop, we are looking for where the buttons are.
+// The user wants ability to delete articles.
+// The current UI shows buttons only for 'pending'.
+// We should probably allow deleting ANY article (approved/rejected/pending).
+// So let's move the delete button outside the 'pending' check, or duplicate it?
+// Usually Admins want to delete anything. Let's add it for all statuses.
+
+// Wait, the previous code had a specific block for 'pending'. 
+// I will place the Delete button *after* the status-specific actions, valid for all.
+
+// Let's replace the whole card content to rearrange or just append the delete button.
+// To be safe and clean, let's look at lines 45-73 which is the pending block.
+// I will insert the delete form AFTER that block.
+
+{
+    article.status === 'pending' && (
+        <div className="flex gap-2 shrink-0">
+            <form action={async () => {
+                'use server';
+                await approveArticle(article.id);
+            }}>
+                <button
+                    type="submit"
+                    className="p-2 bg-green-50 text-green-700 hover:bg-green-100 rounded-full transition-colors border border-green-200"
+                    title="Approve"
+                >
+                    <Check size={20} />
+                </button>
+            </form>
+
+            <form action={async () => {
+                'use server';
+                await rejectArticle(article.id);
+            }}>
+                <button
+                    type="submit"
+                    className="p-2 bg-red-50 text-red-700 hover:bg-red-100 rounded-full transition-colors border border-red-200"
+                    title="Reject"
+                >
+                    <X size={20} />
+                </button>
+            </form>
+        </div>
+    )
+}
+
+{/* Delete Button for ALL statuses */ }
+<div className="ml-2 pl-2 border-l border-beige-200 shrink-0">
+    <form action={async () => {
+        'use server';
+        await deleteArticle(article.id);
+    }}>
+        <button
+            type="submit"
+            className="p-2 bg-gray-50 text-gray-500 hover:bg-red-50 hover:text-red-600 rounded-full transition-colors border border-gray-200 group"
+            title="Delete Permanently"
+        >
+            <Trash2 size={20} className="group-hover:stroke-red-600" />
+        </button>
+    </form>
+</div>
 
 export const dynamic = 'force-dynamic';
 

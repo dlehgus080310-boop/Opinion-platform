@@ -1,10 +1,18 @@
 'use server';
 
-import { addArticle, updateArticleStatus, Article } from "@/lib/store";
+import { addArticle, updateArticleStatus, deleteArticle as deleteArticleFromStore, Article } from "@/lib/store";
 import { revalidatePath } from "next/cache";
 import { redirect } from "next/navigation";
 
 import { put } from '@vercel/blob';
+
+// ... (keep middle content same, just focusing on imports and new function)
+
+export async function deleteArticle(id: string) {
+    await deleteArticleFromStore(id);
+    revalidatePath('/admin');
+    revalidatePath('/');
+}
 
 export async function submitArticle(formData: FormData) {
     const title = formData.get('title') as string;

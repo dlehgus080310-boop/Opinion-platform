@@ -90,3 +90,9 @@ export const updateArticleStatus = async (id: string, status: Article['status'])
         data: { status },
     });
 };
+
+export const deleteArticle = async (id: string) => {
+    await prisma.article.delete({
+        where: { id },
+    });
+};
