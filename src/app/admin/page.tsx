@@ -1,10 +1,19 @@
 import { getArticles } from "@/lib/store";
 import { approveArticle, rejectArticle, deleteArticle } from "@/app/actions";
 import { Check, X, Trash2 } from "lucide-react";
+import { cookies } from "next/headers";
+import { redirect } from "next/navigation";
 
 export const dynamic = 'force-dynamic';
 
 export default async function AdminPage() {
+    const cookieStore = await cookies();
+    const isAdmin = cookieStore.get('admin_session');
+
+    if (!isAdmin) {
+        redirect('/admin/login');
+    }
+
     const allArticles = await getArticles();
     const articles = allArticles.sort((a, b) => b.createdAt - a.createdAt);
 

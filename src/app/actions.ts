@@ -3,8 +3,26 @@
 import { addArticle, updateArticleStatus, deleteArticle as deleteArticleFromStore, Article } from "@/lib/store";
 import { revalidatePath } from "next/cache";
 import { redirect } from "next/navigation";
+import { cookies } from "next/headers";
 
 import { put } from '@vercel/blob';
+
+export async function loginAdmin(formData: FormData) {
+    const password = formData.get('password') as string;
+
+    if (password === '080310') {
+        const cookieStore = await cookies();
+        cookieStore.set('admin_session', 'true', {
+            httpOnly: true,
+            secure: process.env.NODE_ENV === 'production',
+            maxAge: 60 * 60 * 24 * 7, // 1 week
+            path: '/',
+        });
+        redirect('/admin');
+    } else {
+        redirect('/admin/login?error=Invalid password');
+    }
+}
 
 // ... (keep middle content same, just focusing on imports and new function)
 
