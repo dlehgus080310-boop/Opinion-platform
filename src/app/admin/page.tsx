@@ -94,7 +94,7 @@ export default async function AdminPage() {
                                         title="Delete Permanently"
                                     >
                                         <Trash2 size={16} />
-                                        <span className="hidden md:inline">Delete</span>
+                                        <span>Delete</span>
                                     </button>
                                 </form>
                             </div>
