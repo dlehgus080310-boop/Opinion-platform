@@ -1,6 +1,6 @@
 import { getArticles } from "@/lib/store";
 import { approveArticle, rejectArticle, deleteArticle } from "@/app/actions";
-import { Check, X, Trash2 } from "lucide-react";
+import { Check, X, Trash2, Edit2 } from "lucide-react";
 import { cookies } from "next/headers";
 import { redirect } from "next/navigation";
 
@@ -97,6 +97,15 @@ export default async function AdminPage() {
                                         <span>Delete</span>
                                     </button>
                                 </form>
+
+                                <Link
+                                    href={`/admin/edit/${article.id}`}
+                                    className="flex items-center gap-1 px-3 py-2 text-gray-400 hover:text-amber-600 hover:bg-amber-50 rounded-lg transition-colors text-sm"
+                                    title="Edit Article"
+                                >
+                                    <Edit2 size={16} />
+                                    <span>Edit</span>
+                                </Link>
                             </div>
                         </div>
                     ))
