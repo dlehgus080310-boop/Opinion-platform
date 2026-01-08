@@ -34,7 +34,8 @@ export async function editArticle(formData: FormData) {
     const category = formData.get('category') as Article['category'];
     const content = formData.get('content') as string;
     const imageFile = formData.get('imageFile') as File;
-    const deleteImage = formData.get('deleteImage') === 'true';
+    // Checkbox only sends value if checked. Any value means true.
+    const deleteImage = formData.get('deleteImage') != null;
 
     let imageUrl = undefined;
 
