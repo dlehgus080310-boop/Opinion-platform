@@ -6,7 +6,7 @@ import Image from "next/image";
 
 export const dynamic = 'force-dynamic';
 
-const CATEGORIES: Category[] = ['Politics', 'Economy', 'Society', 'Culture', 'Medical', 'Essay', 'Portfolio (Art)', 'Portfolio (Architecture)'];
+const CATEGORIES: Category[] = ['Politics', 'Economy', 'Society', 'Culture', 'Science', 'Medical', 'Essay', 'Portfolio (Art)', 'Portfolio (Architecture)'];
 
 interface PageProps {
   searchParams: Promise<{ category?: string }>;
