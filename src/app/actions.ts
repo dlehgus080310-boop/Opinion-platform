@@ -15,7 +15,7 @@ export async function loginAdmin(formData: FormData) {
 
     if (password === '080310') {
         const cookieStore = await cookies();
-        cookieStore.set('admin_session', 'true', {
+        cookieStore.set('admin_session_v2', 'true', {
             httpOnly: true,
             secure: process.env.NODE_ENV === 'production',
             path: '/',
@@ -29,7 +29,7 @@ export async function loginAdmin(formData: FormData) {
 
 export async function logoutAdmin() {
     const cookieStore = await cookies();
-    cookieStore.delete('admin_session');
+    cookieStore.delete('admin_session_v2');
     redirect('/');
 }
 
