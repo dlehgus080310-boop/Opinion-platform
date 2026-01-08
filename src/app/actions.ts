@@ -18,13 +18,19 @@ export async function loginAdmin(formData: FormData) {
         cookieStore.set('admin_session', 'true', {
             httpOnly: true,
             secure: process.env.NODE_ENV === 'production',
-            maxAge: 60 * 60 * 24 * 7, // 1 week
             path: '/',
+            // No maxAge -> Session cookie (deleted on browser close)
         });
         redirect('/admin');
     } else {
         redirect('/admin/login?error=Invalid password');
     }
+}
+
+export async function logoutAdmin() {
+    const cookieStore = await cookies();
+    cookieStore.delete('admin_session');
+    redirect('/');
 }
 
 export async function editArticle(formData: FormData) {
