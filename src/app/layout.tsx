@@ -34,9 +34,9 @@ export default function RootLayout({
           {children}
         </main>
 
-        <footer className="text-center py-6 text-beige-900/30 text-xs border-t border-beige-200 mt-12 bg-beige-100/50">
+        <footer className="text-center py-6 text-beige-50 text-xs border-t border-amber-800 mt-12 bg-amber-900">
           <p>Opinion Platform &copy; 2026</p>
-          <p className="mt-1 font-mono">System Version 3.4 (Security Patch)</p>
+          <p className="mt-1 font-mono">System Version 3.5 (Final Secure Build)</p>
         </footer>
       </body>
     </html>

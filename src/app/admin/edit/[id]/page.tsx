@@ -3,13 +3,12 @@ import { editArticle } from "@/app/actions";
 import Link from "next/link";
 import { ArrowLeft, Save } from "lucide-react";
 import { ArticleEditor } from "@/components/ArticleEditor";
+import { cookies } from "next/headers";
+import { redirect } from "next/navigation";
 
 interface PageProps {
     params: Promise<{ id: string }>;
 }
-
-import { cookies } from "next/headers";
-import { redirect } from "next/navigation";
 
 export default async function EditPage(props: PageProps) {
     const params = await props.params; // Await params for Next.js 15
