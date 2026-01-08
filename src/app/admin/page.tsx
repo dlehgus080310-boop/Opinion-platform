@@ -1,6 +1,6 @@
 import { getArticles } from "@/lib/store";
-import { approveArticle, rejectArticle, deleteArticle } from "@/app/actions";
-import { Check, X, Trash2, Edit2 } from "lucide-react";
+import { approveArticle, rejectArticle, deleteArticle, logoutAdmin } from "@/app/actions";
+import { Check, X, Trash2, Edit2, LogOut } from "lucide-react";
 import { cookies } from "next/headers";
 import { redirect } from "next/navigation";
 import Link from "next/link";
@@ -20,7 +20,18 @@ export default async function AdminPage() {
 
     return (
         <div>
-            <h1 className="text-3xl font-serif font-bold text-beige-900 mb-8">Admin Dashboard</h1>
+            <div className="flex justify-between items-center mb-8">
+                <h1 className="text-3xl font-serif font-bold text-beige-900">Admin Dashboard</h1>
+                <form action={logoutAdmin}>
+                    <button
+                        type="submit"
+                        className="flex items-center gap-2 px-4 py-2 bg-beige-200 text-beige-900 rounded-lg hover:bg-beige-300 transition-colors text-sm font-medium"
+                    >
+                        <LogOut size={16} />
+                        Logout
+                    </button>
+                </form>
+            </div>
 
             <div className="space-y-4">
                 {articles.length === 0 ? (
