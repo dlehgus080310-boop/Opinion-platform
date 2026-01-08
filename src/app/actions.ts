@@ -1,13 +1,16 @@
 'use server';
 
-import { addArticle, updateArticleStatus, deleteArticle as deleteArticleFromStore, Article } from "@/lib/store";
+import { addArticle, updateArticleStatus, deleteArticle as deleteArticleFromStore, updateArticleContent, Article } from "@/lib/store";
 import { revalidatePath } from "next/cache";
 import { redirect } from "next/navigation";
 import { cookies } from "next/headers";
 
 import { put } from '@vercel/blob';
 
+// ... (keep loginAdmin)
+
 export async function loginAdmin(formData: FormData) {
+    // ... (keep existing)
     const password = formData.get('password') as string;
 
     if (password === '080310') {
@@ -22,6 +25,50 @@ export async function loginAdmin(formData: FormData) {
     } else {
         redirect('/admin/login?error=Invalid password');
     }
+}
+
+export async function editArticle(formData: FormData) {
+    const id = formData.get('id') as string;
+    const title = formData.get('title') as string;
+    const author = formData.get('author') as string;
+    const category = formData.get('category') as Article['category'];
+    const content = formData.get('content') as string;
+    const imageFile = formData.get('imageFile') as File;
+    const keepImage = formData.get('keepImage') === 'true';
+
+    let imageUrl = undefined;
+
+    if (imageFile && imageFile.size > 0) {
+        try {
+            if (process.env.BLOB_READ_WRITE_TOKEN) {
+                const blob = await put(imageFile.name, imageFile, { access: 'public' });
+                imageUrl = blob.url;
+            } else {
+                imageUrl = "https://picsum.photos/800/400";
+            }
+        } catch (error) {
+            console.error("Upload failed", error);
+        }
+    } else if (!keepImage) {
+        // If user explicitly cleared the image (logic to be handled in UI if we add a 'remove image' button, 
+        // but for now if they don't upload a new one, we usually keep the old one unless we pass empty string)
+        // Actually, relying on 'undefined' to skip update in Prisma is safer if we want to keep existing.
+        // But my store function uses spread ...data.
+        // Let's assume if no new file, we don't update imageUrl field at all (undefined).
+    }
+
+    await updateArticleContent(id, {
+        title,
+        author,
+        category,
+        content: content || "",
+        ...(imageUrl ? { imageUrl } : {})
+    });
+
+    revalidatePath('/admin');
+    revalidatePath(`/article/${id}`);
+    revalidatePath('/');
+    redirect('/admin');
 }
 
 // ... (keep middle content same, just focusing on imports and new function)

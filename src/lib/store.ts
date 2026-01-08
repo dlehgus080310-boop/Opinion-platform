@@ -96,3 +96,13 @@ export const deleteArticle = async (id: string) => {
         where: { id },
     });
 };
+
+export const updateArticleContent = async (id: string, data: Partial<Omit<Article, 'id' | 'createdAt' | 'status'>>) => {
+    await prisma.article.update({
+        where: { id },
+        data: {
+            ...data,
+            imageUrl: data.imageUrl === '' ? null : data.imageUrl,
+        }
+    });
+};
