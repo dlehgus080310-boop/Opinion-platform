@@ -14,8 +14,9 @@ export default async function ArticlePage(props: PageProps) {
 
     try {
         article = await getArticleById(params.id);
-    } catch (e: any) {
-        errorMsg = e.message || JSON.stringify(e);
+    } catch (e: unknown) {
+        const errorMessage = e instanceof Error ? e.message : JSON.stringify(e);
+        errorMsg = errorMessage;
         console.error("Error fetching article:", e);
     }
 
