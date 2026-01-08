@@ -49,7 +49,7 @@ export default async function Home(props: PageProps) {
 
       <header className="mb-12 text-center space-y-4">
         <h1 className="text-4xl md:text-5xl font-serif font-bold text-beige-900 tracking-tight">
-          Voices of the Era
+          Voices of the Era v3.2
         </h1>
         <p className="text-lg text-beige-900/60 max-w-2xl mx-auto">
           A collection of curated essays, articles, and perspectives on the world around us.
