@@ -1,4 +1,5 @@
 import { submitArticle } from "@/app/actions";
+import { ArticleEditor } from "@/components/ArticleEditor";
 
 export default function SubmitPage() {
     return (
@@ -74,12 +75,12 @@ export default function SubmitPage() {
                     <label htmlFor="content" className="block text-sm font-medium text-beige-900 mb-2">
                         Content (Optional for Portfolio)
                     </label>
-                    <textarea
+                    <ArticleEditor
                         id="content"
                         name="content"
                         rows={12}
-                        className="w-full px-4 py-2 rounded-lg border border-beige-200 bg-white focus:outline-none focus:ring-2 focus:ring-amber-200/50 resize-y"
-                        placeholder="Write your article here..."
+                        className="w-full px-4 py-2 rounded-lg border border-beige-200 bg-white focus:outline-none focus:ring-2 focus:ring-amber-200/50 resize-y font-mono text-sm leading-relaxed"
+                        placeholder="Write your article here... (Tab key is supported)"
                     />
                 </div>
 

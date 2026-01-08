@@ -2,6 +2,7 @@ import { getArticleById } from "@/lib/store";
 import { editArticle } from "@/app/actions";
 import Link from "next/link";
 import { ArrowLeft, Save } from "lucide-react";
+import { ArticleEditor } from "@/components/ArticleEditor";
 
 interface PageProps {
     params: Promise<{ id: string }>;
@@ -124,12 +125,12 @@ export default async function EditPage(props: PageProps) {
                     <label htmlFor="content" className="block text-sm font-medium text-beige-900 mb-2">
                         Content
                     </label>
-                    <textarea
+                    <ArticleEditor
                         id="content"
                         name="content"
                         rows={12}
                         defaultValue={article.content}
-                        className="w-full px-4 py-2 rounded-lg border border-beige-200 bg-white focus:outline-none focus:ring-2 focus:ring-amber-200/50 resize-y"
+                        className="w-full px-4 py-2 rounded-lg border border-beige-200 bg-white focus:outline-none focus:ring-2 focus:ring-amber-200/50 resize-y font-mono text-sm leading-relaxed"
                     />
                 </div>
 
