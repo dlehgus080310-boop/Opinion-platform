@@ -113,7 +113,7 @@ export default async function Home(props: PageProps) {
               className="group block bg-white rounded-xl shadow-sm border border-beige-200 hover:shadow-md hover:border-amber-300 transition-all duration-300 overflow-hidden"
             >
               {article.imageUrl && (
-                <div className="relative h-48 w-full overflow-hidden bg-beige-100">
+                <div className="relative aspect-video w-full overflow-hidden bg-beige-100 border-b border-beige-100">
                   <Image
                     src={article.imageUrl}
                     alt={article.title}

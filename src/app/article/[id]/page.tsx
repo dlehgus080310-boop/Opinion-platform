@@ -62,12 +62,12 @@ export default async function ArticlePage(props: PageProps) {
 
                 {/* Article Cover Image */}
                 {article.imageUrl && (
-                    <div className="relative w-full h-[50vh] mb-12 rounded-xl overflow-hidden shadow-sm">
+                    <div className="relative w-full mb-12 rounded-xl overflow-hidden shadow-sm bg-beige-50">
                         {/* eslint-disable-next-line @next/next/no-img-element */}
                         <img
                             src={article.imageUrl}
                             alt={article.title}
-                            className="w-full h-full object-cover"
+                            className="w-full h-auto max-h-[80vh] object-contain mx-auto"
                         />
                     </div>
                 )}
