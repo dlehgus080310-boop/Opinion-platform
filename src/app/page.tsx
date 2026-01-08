@@ -5,6 +5,7 @@ import { PenTool } from "lucide-react";
 import Image from "next/image";
 
 export const dynamic = 'force-dynamic';
+export const revalidate = 0; // Disable ISR cache completely
 
 const CATEGORIES: Category[] = ['Politics', 'Economy', 'Society', 'Culture', 'Science', 'Medical', 'Essay', 'Portfolio (Art)', 'Portfolio (Architecture)'];
 
