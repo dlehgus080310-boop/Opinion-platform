@@ -19,7 +19,7 @@ export async function loginAdmin(formData: FormData) {
             httpOnly: true,
             secure: process.env.NODE_ENV === 'production',
             path: '/',
-            // No maxAge -> Session cookie (deleted on browser close)
+            maxAge: 1800, // 30 minutes. Prevents "restore session" issues and ensures reasonably strict re-login.
         });
         redirect('/admin');
     } else {
