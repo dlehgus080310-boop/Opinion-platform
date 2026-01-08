@@ -89,11 +89,25 @@ export default async function EditPage(props: PageProps) {
 
                 <div>
                     <label htmlFor="imageFile" className="block text-sm font-medium text-beige-900 mb-2">
-                        Cover Image (Leave empty to keep current)
+                        Cover Image
                     </label>
                     {article.imageUrl && (
-                        <div className="mb-2 text-xs text-green-600 flex items-center gap-1">
-                            ✓ Current image set
+                        <div className="mb-3 p-3 bg-beige-50 rounded-lg border border-beige-200">
+                            <div className="flex items-center gap-2 mb-2 text-xs text-green-600 font-medium">
+                                ✓ Current image set
+                            </div>
+                            <div className="flex items-center gap-2">
+                                <input
+                                    type="checkbox"
+                                    id="deleteImage"
+                                    name="deleteImage"
+                                    value="true"
+                                    className="rounded border-gray-300 text-red-600 focus:ring-red-500"
+                                />
+                                <label htmlFor="deleteImage" className="text-sm text-red-600">
+                                    Remove this image
+                                </label>
+                            </div>
                         </div>
                     )}
                     <input
@@ -103,6 +117,7 @@ export default async function EditPage(props: PageProps) {
                         accept="image/*"
                         className="w-full px-4 py-2 rounded-lg border border-beige-200 bg-white focus:outline-none focus:ring-2 focus:ring-amber-200/50"
                     />
+                    <p className="text-xs text-beige-900/50 mt-1">Upload new to replace, or check box above to delete.</p>
                 </div>
 
                 <div>

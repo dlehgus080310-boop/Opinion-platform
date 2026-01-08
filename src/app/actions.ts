@@ -34,11 +34,13 @@ export async function editArticle(formData: FormData) {
     const category = formData.get('category') as Article['category'];
     const content = formData.get('content') as string;
     const imageFile = formData.get('imageFile') as File;
-    const keepImage = formData.get('keepImage') === 'true';
+    const deleteImage = formData.get('deleteImage') === 'true';
 
     let imageUrl = undefined;
 
-    if (imageFile && imageFile.size > 0) {
+    if (deleteImage) {
+        imageUrl = ""; // Will be converted to null by store logic
+    } else if (imageFile && imageFile.size > 0) {
         try {
             if (process.env.BLOB_READ_WRITE_TOKEN) {
                 const blob = await put(imageFile.name, imageFile, { access: 'public' });
@@ -49,12 +51,6 @@ export async function editArticle(formData: FormData) {
         } catch (error) {
             console.error("Upload failed", error);
         }
-    } else if (!keepImage) {
-        // If user explicitly cleared the image (logic to be handled in UI if we add a 'remove image' button, 
-        // but for now if they don't upload a new one, we usually keep the old one unless we pass empty string)
-        // Actually, relying on 'undefined' to skip update in Prisma is safer if we want to keep existing.
-        // But my store function uses spread ...data.
-        // Let's assume if no new file, we don't update imageUrl field at all (undefined).
     }
 
     await updateArticleContent(id, {
@@ -62,7 +58,7 @@ export async function editArticle(formData: FormData) {
         author,
         category,
         content: content || "",
-        ...(imageUrl ? { imageUrl } : {})
+        ...(imageUrl !== undefined ? { imageUrl } : {})
     });
 
     revalidatePath('/admin');
