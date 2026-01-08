@@ -8,8 +8,18 @@ interface PageProps {
     params: Promise<{ id: string }>;
 }
 
+import { cookies } from "next/headers";
+import { redirect } from "next/navigation";
+
 export default async function EditPage(props: PageProps) {
     const params = await props.params; // Await params for Next.js 15
+
+    const cookieStore = await cookies();
+    const isAdmin = cookieStore.get('admin_session_v2');
+    if (!isAdmin) {
+        redirect('/admin/login');
+    }
+
     const article = await getArticleById(params.id);
 
     if (!article) {
