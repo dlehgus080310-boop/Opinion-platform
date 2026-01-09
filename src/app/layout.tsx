@@ -37,7 +37,7 @@ export default function RootLayout({
 
         <footer className="text-center py-6 text-beige-50 text-xs border-t border-amber-800 mt-12 bg-amber-900">
           <p>Opinion Platform &copy; 2026</p>
-          <p className="mt-1 font-mono">System Version 4.0 (Final Live Build)</p>
+          <p className="mt-1 font-mono">System Version 4.1 (Portfolio Live)</p>
         </footer>
       </body>
     </html>
