@@ -93,8 +93,8 @@ export default async function EditPage(props: PageProps) {
                         <option value="Science">Science</option>
                         <option value="Medical">Medical</option>
                         <option value="Essay">Essay</option>
-                        <option value="Portfolio (Art)">Portfolio (Art)</option>
-                        <option value="Portfolio (Architecture)">Portfolio (Architecture)</option>
+                        <option value="Academic Research">Academic Research</option>
+                        <option value="AP Economics Insights">AP Economics Insights</option>
                     </select>
                 </div>
 

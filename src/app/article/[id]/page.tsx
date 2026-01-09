@@ -1,5 +1,6 @@
 import { getArticleById } from "@/lib/store";
 import Link from "next/link";
+import Image from "next/image";
 import { ArrowLeft } from "lucide-react";
 
 interface PageProps {
@@ -46,28 +47,35 @@ export default async function ArticlePage(props: PageProps) {
             </Link>
 
             <header className="mb-12 text-center">
-                <div className="flex justify-center mb-6">
-                    <span className="px-3 py-1 bg-amber-50 text-amber-800 text-xs font-bold tracking-widest uppercase rounded-full">
-                        {article.category}
-                    </span>
-                </div>
-                <h1 className="text-4xl md:text-5xl font-serif font-bold text-beige-900 mb-6 leading-tight">
-                    {article.title}
-                </h1>
-                <div className="flex items-center justify-center gap-4 text-beige-900/60 text-sm mb-8">
-                    <span className="font-medium text-beige-900">{article.author}</span>
-                    <span>•</span>
-                    <span>{new Date(article.createdAt).toLocaleDateString(undefined, { year: 'numeric', month: 'long', day: 'numeric' })}</span>
+                <div className="border-b border-beige-200 pb-8 mb-8">
+                    <div className="flex items-center gap-3 mb-6">
+                        <span className="text-sm font-bold tracking-wider uppercase text-amber-800 bg-amber-50 px-3 py-1 rounded">
+                            {article.category}
+                        </span>
+                        <span className="text-sm text-beige-900/60">
+                            {new Date(article.createdAt).toLocaleDateString('en-US', { year: 'numeric', month: 'short', day: '2-digit' })}
+                        </span>
+                    </div>
+                    <h1 className="text-4xl md:text-5xl font-serif font-bold text-beige-900 mb-6 leading-tight">
+                        {article.title}
+                    </h1>
+                    <div className="flex items-center gap-3 text-beige-900/60 font-medium">
+                        <div className="w-10 h-10 rounded-full bg-beige-200 flex items-center justify-center text-lg font-serif">
+                            {article.author[0]}
+                        </div>
+                        <span>By {article.author}</span>
+                    </div>
                 </div>
 
-                {/* Article Cover Image */}
                 {article.imageUrl && (
-                    <div className="relative w-full mb-12 rounded-xl overflow-hidden shadow-sm bg-beige-50">
-                        {/* eslint-disable-next-line @next/next/no-img-element */}
-                        <img
+                    <div className="relative w-full h-auto max-h-[600px] mb-10 rounded-xl overflow-hidden border border-beige-200 bg-beige-50">
+                        <Image
                             src={article.imageUrl}
                             alt={article.title}
-                            className="w-full h-auto max-h-[80vh] object-contain mx-auto"
+                            width={1200}
+                            height={800}
+                            className="w-full h-auto object-contain max-h-[600px]"
+                            priority
                         />
                     </div>
                 )}

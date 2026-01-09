@@ -7,7 +7,7 @@ import Image from "next/image";
 export const dynamic = 'force-dynamic';
 export const revalidate = 0; // Disable ISR cache completely
 
-const CATEGORIES: Category[] = ['Politics', 'Economy', 'Society', 'Culture', 'Science', 'Medical', 'Essay', 'Portfolio (Art)', 'Portfolio (Architecture)'];
+const CATEGORIES: Category[] = ['Politics', 'Economy', 'Society', 'Culture', 'Science', 'Medical', 'Essay', 'Academic Research', 'AP Economics Insights'];
 
 interface PageProps {
   searchParams: Promise<{ category?: string }>;
@@ -50,10 +50,10 @@ export default async function Home(props: PageProps) {
 
       <header className="mb-12 text-center space-y-4">
         <h1 className="text-4xl md:text-5xl font-serif font-bold text-beige-900 tracking-tight">
-          Voices of the Era v3.2
+          Voices of the Era v4.0
         </h1>
         <p className="text-lg text-beige-900/60 max-w-2xl mx-auto">
-          A collection of curated essays, articles, and perspectives on the world around us.
+          A platform bridging academic theories and real-world issues.
         </p>
       </header>
 
@@ -129,7 +129,7 @@ export default async function Home(props: PageProps) {
                     {article.category}
                   </span>
                   <span className="text-xs text-beige-900/40">
-                    {new Date(article.createdAt).toLocaleDateString()}
+                    {new Date(article.createdAt).toLocaleDateString('en-US', { year: 'numeric', month: 'short', day: '2-digit' })}
                   </span>
                 </div>
                 <h2 className="text-2xl font-serif font-bold text-beige-900 mb-3 group-hover:text-amber-800 transition-colors">

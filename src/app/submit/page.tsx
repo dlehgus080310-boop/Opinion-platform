@@ -40,12 +40,10 @@ export default function SubmitPage() {
                         Category
                     </label>
                     <select
-                        id="category"
                         name="category"
-                        required
-                        className="w-full px-4 py-2 rounded-lg border border-beige-200 bg-white focus:outline-none focus:ring-2 focus:ring-amber-200/50"
+                        id="category"
+                        className="w-full px-4 py-3 rounded-lg border border-beige-300 bg-white focus:outline-none focus:ring-2 focus:ring-amber-500/20 text-beige-900"
                     >
-                        <option value="">Select a category...</option>
                         <option value="Politics">Politics</option>
                         <option value="Economy">Economy</option>
                         <option value="Society">Society</option>
@@ -53,8 +51,8 @@ export default function SubmitPage() {
                         <option value="Science">Science</option>
                         <option value="Medical">Medical</option>
                         <option value="Essay">Essay</option>
-                        <option value="Portfolio (Art)">Portfolio (Art)</option>
-                        <option value="Portfolio (Architecture)">Portfolio (Architecture)</option>
+                        <option value="Academic Research">Academic Research</option>
+                        <option value="AP Economics Insights">AP Economics Insights</option>
                     </select>
                 </div>
 

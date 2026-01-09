@@ -12,12 +12,16 @@ export default function Navbar() {
                     <Link href="/" className="hover:text-amber-700 transition-colors">
                         Read
                     </Link>
+                    <Link href="/about" className="hover:text-amber-700 transition-colors">
+                        About
+                    </Link>
                     <Link href="/submit" className="hover:text-amber-700 transition-colors">
                         Submit
                     </Link>
-                    <Link href="/plagiarism-check" className="hover:text-amber-700 transition-colors">
+                    {/* Internal Tool Hidden for Public Portfolio */}
+                    {/* <Link href="/plagiarism-check" className="hover:text-amber-700 transition-colors">
                         Check Plagiarism
-                    </Link>
+                    </Link> */}
                     <Link href="/admin" className="text-xs text-beige-900/50 hover:text-amber-700 transition-colors">
                         Admin
                     </Link>

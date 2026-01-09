@@ -1,6 +1,6 @@
 import { prisma } from "./prisma";
 
-export type Category = 'Politics' | 'Economy' | 'Society' | 'Culture' | 'Science' | 'Medical' | 'Essay' | 'Portfolio (Art)' | 'Portfolio (Architecture)';
+export type Category = 'Politics' | 'Economy' | 'Society' | 'Culture' | 'Science' | 'Medical' | 'Essay' | 'Academic Research' | 'AP Economics Insights';
 
 export interface Article {
     id: string;
